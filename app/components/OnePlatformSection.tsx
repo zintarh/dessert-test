@@ -197,29 +197,6 @@ export default function OnePlatformSection() {
     }
   ];
 
-  const getItemIcon = (itemName: string) => {
-    const iconMap: { [key: string]: React.ReactElement } = {
-      "Report Builder": <BarChart3 className="w-3 h-3" />,
-      "Time Tracking": <Clock className="w-3 h-3" />,
-      "Payroll": <DollarSign className="w-3 h-3" />,
-      "Onboarding": <UserPlus className="w-3 h-3" />,
-      "Workflows": <Workflow className="w-3 h-3" />,
-      "Employee Record": <Users className="w-3 h-3" />,
-      "Grow": <TrendingUp className="w-3 h-3" />,
-      "Engagement": <Award className="w-3 h-3" />,
-      "Performance": <Target className="w-3 h-3" />,
-      "Compensation": <DollarSign className="w-3 h-3" />,
-      "Analytics": <BarChart3 className="w-3 h-3" />,
-      "OKRs & Goals": <Target className="w-3 h-3" />,
-      "Engagement insights": <Award className="w-3 h-3" />,
-      "Performance Summaries": <BarChart3 className="w-3 h-3" />,
-      "HR Help Desk": <MessageSquare className="w-3 h-3" />,
-      "Writing Assist": <BookOpen className="w-3 h-3" />,
-      "Personalized Coaching": <UserCheck className="w-3 h-3" />,
-      "Meeting Assist": <Video className="w-3 h-3" />,
-    };
-    return iconMap[itemName] || <div className="w-3 h-3" />;
-  };
 
   return (
     <div className="bg-white py-12 sm:py-16 md:py-20">

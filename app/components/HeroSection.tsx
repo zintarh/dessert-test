@@ -1,8 +1,12 @@
 "use client";
 import { ArrowRight, FileText, TrendingUp, UserCheck } from "lucide-react";
 import { useTypewriter } from "../hooks/useTypewriter";
+import { useRef, useEffect, useState } from "react";
 
 export default function HeroSection() {
+  const [isVisible, setIsVisible] = useState(false);
+  const heroRef = useRef<HTMLDivElement>(null);
+
   const placeholderTexts = [
     "Expert-guided applications in healthcare",
     "Sustainable energy storage solutions",
@@ -19,26 +23,54 @@ export default function HeroSection() {
     loop: true,
   });
 
+  useEffect(() => {
+    const timer = setTimeout(() => setIsVisible(true), 200);
+    return () => clearTimeout(timer);
+  }, []);
+
   return (
     <div className="flex py-8 sm:py-12 md:py-16 lg:py-20 mt-16 sm:mt-18 md:mt-20">
       <div className="max-w-7xl mx-auto px-3 sm:px-4 md:px-6 lg:px-8 w-full">
-        <div className="bg-white flex flex-col items-center rounded-2xl sm:rounded-3xl md:rounded-4xl shadow-sm border border-gray-100 p-4 sm:p-6 md:p-8 lg:p-12">
-          <div className="mb-6 flex justify-center">
+        <div 
+          ref={heroRef}
+          className="bg-white flex flex-col items-center rounded-2xl sm:rounded-3xl md:rounded-4xl shadow-sm border border-gray-100 p-4 sm:p-6 md:p-8 lg:p-12"
+        >
+          <div 
+            className={`mb-6 flex justify-center transition-all duration-700 ease-out ${
+              isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
+            }`}
+            style={{ transitionDelay: '100ms' }}
+          >
             <span className=" bg-purple-100 text-purple-800 text-sm font-medium px-3 py-1 rounded-full">
               RESEARCH  SUCCESS PLATFORM
             </span>
           </div>
 
-          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-center font-bold text-gray-900 mb-4 sm:mb-6 leading-tight">
+          <h1 
+            className={`text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-center font-bold text-gray-900 mb-4 sm:mb-6 leading-tight transition-all duration-800 ease-out ${
+              isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'
+            }`}
+            style={{ transitionDelay: '200ms' }}
+          >
             From Research to 
             <span className="text-purple-600"> $50M+ in Grants</span>
           </h1>
           
-          <p className="text-base sm:text-lg text-gray-700 text-center mb-6 sm:mb-8 max-w-3xl mx-auto leading-relaxed px-2">
+          <p 
+            className={`text-base sm:text-lg text-gray-700 text-center mb-6 sm:mb-8 max-w-3xl mx-auto leading-relaxed px-2 transition-all duration-800 ease-out ${
+              isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
+            }`}
+            style={{ transitionDelay: '300ms' }}
+          >
             Stop wasting time on unfundable research. Our platform analyzes your topic across six dimensions to identify funding opportunities and maximize your grant success.
           </p>
 
-          <div className="space-y-4 sm:space-y-6 mb-8 sm:mb-12 w-full">
+          <div 
+            className={`space-y-4 sm:space-y-6 mb-8 sm:mb-12 w-full transition-all duration-800 ease-out ${
+              isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'
+            }`}
+            style={{ transitionDelay: '400ms' }}
+          >
             <div className="flex w-full border items-center px-4 sm:px-6 md:px-9 border-gray-500 h-[60px] sm:h-[70px] md:h-[80px] rounded-full space-x-2 sm:space-x-3 shadow-2xl shadow-purple-400/60 ring-2 ring-purple-300/40 hover:shadow-2xl hover:shadow-purple-500/80 hover:ring-4 hover:ring-purple-400/60 transition-all duration-500 focus-within:shadow-2xl focus-within:shadow-purple-500/80 focus-within:ring-4 focus-within:ring-purple-400/60">
               <div className="w-full h-full flex items-center relative">
                 <input
@@ -59,7 +91,12 @@ export default function HeroSection() {
               </button>
             </div>
 
-            <div className="flex w-full">
+            <div 
+              className={`flex w-full transition-all duration-800 ease-out ${
+                isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'
+              }`}
+              style={{ transitionDelay: '500ms' }}
+            >
               <div className="border border-gray-400 rounded-2xl sm:rounded-3xl md:rounded-4xl px-3 sm:px-4 py-2 w-full">
                 <p className="text-black text-sm sm:text-base md:text-lg pt-3 sm:pt-4 md:pt-5">
                   <strong>Grant Potential: High</strong> - This topic aligns with current NSF funding priorities and has strong commercial viability. Expected funding range: $200K-$500K over 2-3 years.
@@ -83,11 +120,21 @@ export default function HeroSection() {
             </div>
           </div>
 
-          <div className="text-center py-2 px-2">
+          <div 
+            className={`text-center py-2 px-2 transition-all duration-800 ease-out ${
+              isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
+            }`}
+            style={{ transitionDelay: '600ms' }}
+          >
             <p className="text-gray-600 text-base sm:text-lg md:text-xl mb-4 sm:mb-6 max-w-3xl mx-auto">
               Join thousands of researchers who secured $50M+ in funding. Get instant analysis, identify grant opportunities, and receive expert guidance to strengthen your proposals.
             </p>
-            <button className="bg-primary text-purple-800 px-6 py-3 sm:px-8 sm:py-4 rounded-lg text-base sm:text-lg font-medium transition-colors hover:bg-purple-800 hover:text-white">
+            <button 
+              className={`bg-primary text-purple-800 px-6 py-3 sm:px-8 sm:py-4 rounded-lg text-base sm:text-lg font-medium transition-all duration-800 ease-out hover:bg-purple-800 hover:text-white ${
+                isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
+              }`}
+              style={{ transitionDelay: '700ms' }}
+            >
               Start Your Grant Journey
             </button>
           </div>
