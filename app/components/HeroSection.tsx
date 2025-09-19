@@ -5,7 +5,10 @@ import { useRef, useEffect, useState } from "react";
 
 export default function HeroSection() {
   const [isVisible, setIsVisible] = useState(false);
+  const [isTyping, setIsTyping] = useState(false);
+  const [inputValue, setInputValue] = useState('');
   const heroRef = useRef<HTMLDivElement>(null);
+  const timeoutRef = useRef<NodeJS.Timeout | null>(null);
 
   const placeholderTexts = [
     "Expert-guided applications in healthcare",
@@ -27,6 +30,38 @@ export default function HeroSection() {
     const timer = setTimeout(() => setIsVisible(true), 200);
     return () => clearTimeout(timer);
   }, []);
+
+  useEffect(() => {
+    return () => {
+      if (timeoutRef.current) {
+        clearTimeout(timeoutRef.current);
+      }
+    };
+  }, []);
+
+  const handleInputFocus = () => {
+    setIsTyping(true);
+  };
+
+  const handleInputBlur = () => {
+    if (inputValue === '') {
+      // Small delay to prevent flickering
+      timeoutRef.current = setTimeout(() => setIsTyping(false), 100);
+    }
+  };
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setInputValue(e.target.value);
+    if (e.target.value === '') {
+      // Small delay to prevent flickering
+      timeoutRef.current = setTimeout(() => setIsTyping(false), 100);
+    } else {
+      if (timeoutRef.current) {
+        clearTimeout(timeoutRef.current);
+      }
+      setIsTyping(true);
+    }
+  };
 
   return (
     <div className="flex py-8 sm:py-12 md:py-16 lg:py-20 mt-16 sm:mt-18 md:mt-20">
@@ -75,10 +110,16 @@ export default function HeroSection() {
               <div className="w-full h-full flex items-center relative">
                 <input
                   type="text"
-                  className="w-full h-full outline-none text-sm sm:text-base border-none text-black placeholder:text-transparent"
-                  placeholder=""
+                  value={inputValue}
+                  onChange={handleInputChange}
+                  onFocus={handleInputFocus}
+                  onBlur={handleInputBlur}
+                  className="w-full h-full outline-none text-sm sm:text-base border-none text-black placeholder:text-black transition-all duration-300"
+                  placeholder={isTyping ? "Enter your research topic..." : ""}
                 />
-                <div className="absolute inset-0 flex items-center pointer-events-none px-2">
+                <div className={`absolute inset-0 flex items-center pointer-events-none px-2 transition-opacity duration-300 ${
+                  !isTyping ? 'opacity-100' : 'opacity-0'
+                }`}>
                   <span className="text-black text-sm sm:text-base">
                     {typewriterText}
                     <span className="inline-block w-0.5 h-4 sm:h-5 bg-black ml-1 typewriter-cursor" />
